@@ -1,12 +1,12 @@
 version: '3.9'
 services:
-  back:
-    build:
-      context: .
-      dockerfile: /docker/dockerfile
-    ports:
-      - "8080:8000"
-    working_dir: /app
+#  back:
+#    build:
+#      context: .
+#      dockerfile: /docker/dockerfile
+#    ports:
+#      - "8080:8000"
+#    working_dir: /app
 
   postgres:
     image: postgres:alpine
