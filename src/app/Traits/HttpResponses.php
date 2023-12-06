@@ -15,7 +15,7 @@ trait HttpResponses
         ], $code);
     }
 
-    protected function error($data, $message = null, $code)
+    protected function error($data, $message = null, $code): JsonResponse
     {
         return response()->json([
             'status' => 'Произошла ошибка.',

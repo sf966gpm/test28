@@ -5,16 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CarBrandCollection;
 use App\Http\Resources\CarBrandResource;
 use App\Models\CarBrand;
-use Illuminate\Http\Request;
 
 class CarBrandController extends Controller
 {
     /**
      * Показать все
-     * @param Request $request
      * @return CarBrandCollection
      */
-    public function index(Request $request): CarBrandCollection
+    public function index(): CarBrandCollection
     {
         return new CarBrandCollection(CarBrand::all());
     }

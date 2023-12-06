@@ -10,11 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('car_brands', function (Blueprint $table) {
+        Schema::create('car_models', function (Blueprint $table) {
             $table->id();
-//            Примерно оценил в 15 символов
-            $table->string('name', 15)->unique();
+            $table->string('name')->unique();
+            $table->unsignedBigInteger('car_brand_id');
             $table->timestamps();
+            $table->foreign('car_brand_id')
+                ->references('id')->on('car_brands')->onDelete('cascade');
         });
     }
 

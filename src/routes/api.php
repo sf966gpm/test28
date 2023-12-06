@@ -14,7 +14,9 @@ Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 
 
 Route::apiResource('/CarBrands', \App\Http\Controllers\CarBrandController::class)->only(
-    'index','show'
+    'index', 'show'
 );
-//Route::get('/CarBrands', [\App\Http\Controllers\CarBrandController::class ,'index']);
-//Route::get('/CarBrands/{id}', [\App\Http\Controllers\CarBrandController::class,'show']);
+
+Route::apiResource('/CarModels', \App\Http\Controllers\CarModelController::class)->only(
+    'index', 'show'
+);
