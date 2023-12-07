@@ -2,12 +2,10 @@
 
 namespace App\Exceptions;
 
-use App\Models\CarBrand;
-use App\Models\CarModel;
 use App\Traits\HttpResponses;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -39,6 +37,9 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof ModelNotFoundException && $request->wantsJson()) {
             return $this->error('', 'Модель не найдена.', 404);
+        }
+        if ($e instanceof QueryException && $request->wantsJson()) {
+            return $this->error('', 'Конфликт.', 409);
         }
 
         return parent::render($request, $e);

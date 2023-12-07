@@ -19,11 +19,15 @@ class CarBrandFactory extends Factory
         return [
             'name' => fake()->unique()->randomElement([
                 'BMW',
-                'Ford',
-                'Toyota',
-                'Nissan',
-                'Honda',
-                'Volkswagen'
+                'FORD',
+                'TOYOTA',
+                'NISSAN',
+                'HONDA',
+                'VOLKSWAGEN',
+                'ACURA',
+                'BRILLIANCE',
+                'BUGATTI',
+                'CHANGAN',
             ]),
         ];
     }

@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('name')->unique();
             $table->unsignedBigInteger('car_brand_id');
             $table->timestamps();
+
             $table->foreign('car_brand_id')
                 ->references('id')->on('car_brands')->onDelete('cascade');
         });
@@ -25,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('car_brands');
+        Schema::dropIfExists('car_models');
     }
 };

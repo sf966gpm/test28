@@ -30,19 +30,14 @@ class AuthController extends Controller
 
     public function register(StoreUserRequest $request): JsonResponse
     {
-        try {
-            $user = User::create([
-                'name' => $request->name,
-                'password' => Hash::make($request->password)
-            ]);
-            return $this->success([
-                'user' => $user,
-                'token' => $user->createToken('API Token пользователя ' . $user->name)->plainTextToken
-            ]);
-
-        } catch (\Exception $e) {
-            return $this->error('', $e->getMessage(), 401);
-        }
+        $user = User::create([
+            'name' => $request->name,
+            'password' => Hash::make($request->password)
+        ]);
+        return $this->success([
+            'user' => $user,
+            'token' => $user->createToken('API Token пользователя ' . $user->name)->plainTextToken
+        ]);
     }
 
     public function logout()

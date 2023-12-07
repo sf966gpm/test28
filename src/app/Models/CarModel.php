@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CarModel extends Model
 {
@@ -20,11 +21,19 @@ class CarModel extends Model
         'updated_at',
     ];
     protected $casts = [
-        'car_brand_id' => 'integer'
+        'car_brand_id' => 'integer',
+        'car_model_id' => 'integer',
+        'vehicle_year' => 'integer',
+        'mileage' => 'integer',
     ];
 
-    public function carModel(): BelongsTo
+    public function carBrand(): BelongsTo
     {
-        return $this->belongsTo(CarBrand::class, 'id', 'car_brand_id');
+        return $this->belongsTo(CarBrand::class, 'car_brand_id', 'id');
+    }
+
+    public function car(): HasMany
+    {
+        return $this->hasMany(Car::class, 'car_brand_id', 'id');
     }
 }

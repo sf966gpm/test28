@@ -14,13 +14,11 @@ class CarBrandCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
-    }
-
-    public function with(Request $request)
-    {
         return [
-            'status' => 'success'
+            'status' => 'Запрос был успешно выполнен.',
+            'message' => null,
+            'data' => $this->collection,
         ];
     }
+
 }

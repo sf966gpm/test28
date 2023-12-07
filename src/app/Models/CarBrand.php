@@ -18,8 +18,15 @@ class CarBrand extends Model
         'created_at',
         'updated_at',
     ];
+
     public function carModel(): HasMany
     {
         return $this->hasMany(CarModel::class, 'car_brand_id', 'id');
+    }
+
+
+    public function car(): HasMany
+    {
+        return $this->hasMany(Car::class, 'car_brand_id', 'id');
     }
 }

@@ -20,3 +20,7 @@ Route::apiResource('/CarBrands', \App\Http\Controllers\CarBrandController::class
 Route::apiResource('/CarModels', \App\Http\Controllers\CarModelController::class)->only(
     'index', 'show'
 );
+
+Route::apiResource('/Cars', \App\Http\Controllers\CarController::class)->only(
+    'index', 'show'
+);
