@@ -26,12 +26,8 @@ class Car extends Model
         'car_model_id' => 'integer',
         'vehicle_year' => 'integer',
         'mileage' => 'integer',
+        'user_id' => 'integer',
     ];
-
-//    public function carBrand(): BelongsTo
-//    {
-//        return $this->belongsTo(CarBrand::class, 'car_brand_id', 'id');
-//    }
 
     public function carModel(): BelongsTo
     {

@@ -20,7 +20,7 @@ class CarModelFactory extends Factory
     {
         return [
             'name' => fake()->unique()->sentence(),
-            'car_brand_id' => CarBrand::factory(),
+            'car_brand_id' => CarBrand::factory()
         ];
     }
 }
