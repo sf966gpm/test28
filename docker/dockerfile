@@ -1,4 +1,3 @@
-# Dockerfile
 FROM php:8.2-cli
 
 RUN apt-get update \
@@ -13,10 +12,10 @@ RUN apt-get update \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
-COPY ./src /app
-COPY .env /app
+COPY . /app
 
 RUN composer install
 
+COPY .env /app
 EXPOSE 8000
 CMD php artisan serve --host=0.0.0.0 --port=8000
