@@ -13,8 +13,10 @@ class UserService
     {
         $user = User::create([
             'email' => $validated['email'],
+            'name' => $validated['name'],
             'password' => Hash::make($validated['password']),
         ]);
+
 
         return [
             'user' => $user,

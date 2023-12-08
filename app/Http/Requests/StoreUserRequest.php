@@ -23,7 +23,18 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'email' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'confirmed', 'min:6'],
+            'name' => [
+                'required',
+                'string'
+            ],
+            'password' => [
+                'required',
+                'confirmed',
+                'min:6',
+                // Если хочется настоящий пароль
+                // A-Z a-z 0-9 Non-alphanumeric Unicode characters
+//                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            ],
         ];
     }
 }
