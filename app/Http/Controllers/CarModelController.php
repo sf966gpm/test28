@@ -16,8 +16,8 @@ class CarModelController extends Controller
         return new CarModelCollection(CarModel::with('carBrand')->paginate());
     }
 
-    public function show(Request $request, CarModel $CarModel): CarModelResource
+    public function show(CarModel $carModel): CarModelResource
     {
-        return new CarModelResource($CarModel->load('carBrand'));
+        return new CarModelResource($carModel->load('carBrand'));
     }
 }

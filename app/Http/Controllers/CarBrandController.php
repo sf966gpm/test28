@@ -8,25 +8,13 @@ use App\Models\CarBrand;
 
 class CarBrandController extends Controller
 {
-    /**
-     * Показать все
-     * @return CarBrandCollection
-     */
     public function index(): CarBrandCollection
     {
         return new CarBrandCollection(CarBrand::paginate());
     }
 
-    /**
-     * Показать бренд по id
-     *
-     * Странный biding нарушает PHP Code Style Conventions
-     * Пока пусть будет так
-     * @param CarBrand $CarBrand
-     * @return CarBrandResource
-     */
-    public function show(CarBrand $CarBrand): CarBrandResource
+    public function show(CarBrand $carBrand): CarBrandResource
     {
-        return new CarBrandResource($CarBrand);
+        return new CarBrandResource($carBrand);
     }
 }

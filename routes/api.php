@@ -14,15 +14,15 @@ Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('/CarBrands', \App\Http\Controllers\CarBrandController::class)->only(
+    Route::apiResource('/carBrands', \App\Http\Controllers\CarBrandController::class)->only(
         'index', 'show'
     );
 
-    Route::apiResource('/CarModels', \App\Http\Controllers\CarModelController::class)->only(
+    Route::apiResource('/carModels', \App\Http\Controllers\CarModelController::class)->only(
         'index', 'show'
     );
 
-    Route::apiResource('/Cars', \App\Http\Controllers\CarController::class)->only(
+    Route::apiResource('/cars', \App\Http\Controllers\CarController::class)->only(
         'index', 'show'
     );
 

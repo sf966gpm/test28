@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CarCollection;
 use App\Http\Resources\CarResource;
 use App\Models\Car;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
 class CarController extends Controller
 {
-    public function index()
+    public function index(): JsonResource
     {
         return new CarCollection(
             Car::with('carModel.carBrand', 'user')
@@ -18,9 +19,9 @@ class CarController extends Controller
         );
     }
 
-    public function show(Car $Car)
+    public function show(Car $car): JsonResource
     {
-        return new CarResource($Car->load('carModel.carBrand', 'user'));
+        return new CarResource($car->load('carModel.carBrand', 'user'));
 
     }
 
