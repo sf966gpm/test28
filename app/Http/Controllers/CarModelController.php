@@ -13,7 +13,7 @@ class CarModelController extends Controller
 
     public function index(): CarModelCollection
     {
-        return new CarModelCollection(CarModel::with('carBrand')->get());
+        return new CarModelCollection(CarModel::with('carBrand')->paginate());
     }
 
     public function show(Request $request, CarModel $CarModel): CarModelResource

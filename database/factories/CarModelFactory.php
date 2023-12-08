@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\CarBrand;
-use App\Models\CarModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

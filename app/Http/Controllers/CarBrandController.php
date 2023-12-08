@@ -14,7 +14,7 @@ class CarBrandController extends Controller
      */
     public function index(): CarBrandCollection
     {
-        return new CarBrandCollection(CarBrand::all());
+        return new CarBrandCollection(CarBrand::paginate());
     }
 
     /**
