@@ -15,8 +15,6 @@ class CarBrandCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'status' => 'Запрос был успешно выполнен.',
-            'message' => null,
             'data' => $this->collection,
         ];
     }

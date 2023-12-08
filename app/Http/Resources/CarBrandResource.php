@@ -15,9 +15,8 @@ class CarBrandResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-//            'status' => 'Запрос был успешно выполнен.',
-//            'message' => null,
-            'data' => $this->resource,
+            'id' => $this->id,
+            'name' => $this->name,
         ];
     }
 

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CarResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,8 @@ class CarResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'vehicle_year' => $this->vehicle_year,
-            'mileage' => $this->mileage,
-            'color' => $this->color,
-            'car_model' => new CarModelResource($this->carModel),
-            'user' => new UserResource($this->user)
+            'name' => $this->name,
+            'email' => $this->email
         ];
-
     }
 }

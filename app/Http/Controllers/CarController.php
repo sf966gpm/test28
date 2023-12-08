@@ -10,23 +10,13 @@ class CarController extends Controller
 {
     public function index()
     {
-        $cars = Car::with('carModel.carBrand')->get();
-        return new CarCollection($cars);
+        return new CarCollection(Car::with('carModel.carBrand', 'user')->get());
     }
 
     public function show(Car $Car)
     {
-//        $cars = Car::with('carModel.carBrand')->get();
-        return new CarResource($Car);
+        return new CarResource($Car->load('carModel.carBrand', 'user'));
 
     }
-//    public function index(): CarModelCollection
-//    {
-//        return new CarModelCollection(CarModel::all());
-//    }
-//
-//    public function show(CarModel $CarModel): CarModelResource
-//    {
-//        return new CarModelResource($CarModel);
-//    }
+
 }

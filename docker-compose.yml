@@ -19,7 +19,7 @@ services:
         networks:
             - back
         ports:
-            - "${DB_PORT}:5432"
+            - "${DB_PORT}:${DB_PORT}"
         volumes:
             - bd:/var/lib/postgresql
 

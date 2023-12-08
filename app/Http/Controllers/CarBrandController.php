@@ -14,10 +14,6 @@ class CarBrandController extends Controller
      */
     public function index(): CarBrandCollection
     {
-        /**
-         * Как я понял отдавать нужно без связей
-         */
-//        return new CarBrandCollection(CarBrand::with('carModel')->get());
         return new CarBrandCollection(CarBrand::all());
     }
 

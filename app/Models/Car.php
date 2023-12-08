@@ -37,4 +37,9 @@ class Car extends Model
     {
         return $this->belongsTo(CarModel::class, 'car_model_id', 'id');
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
