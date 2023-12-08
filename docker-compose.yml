@@ -6,8 +6,10 @@ services:
             dockerfile: /docker/dockerfile
         networks:
             - back
+        volumes:
+            - ./:/app
         ports:
-            - "7777:8000"
+            - "8000:8000"
         working_dir: /app
 
     postgres:
@@ -19,7 +21,7 @@ services:
         networks:
             - back
         ports:
-            - "${DB_PORT}:${DB_PORT}"
+            - "${DB_PORT}:5432"
         volumes:
             - bd:/var/lib/postgresql
 

@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserService
@@ -17,12 +16,7 @@ class UserService
             'password' => Hash::make($validated['password']),
         ]);
 
-
-        return [
-            'user' => $user,
-            'token' => $user->createToken('API Token для ' . $user->email)->plainTextToken,
-            'token_type' => 'Bearer'
-        ];
+        return $this->userData($user);
 
     }
 
@@ -34,10 +28,16 @@ class UserService
      */
     public function loginUserData(string $email): array
     {
-        $user = User::where($email)->first();
+        $user = User::where(['email' => $email])->first();
+        return $this->userData($user);
+
+    }
+
+    private function userData(User $user): array
+    {
         return [
             'user' => $user,
-            'token' => $user->createToken('API Token пользователя ' . $user->name)->plainTextToken,
+            'token' => $user->createToken('API Token для ' . $user->email)->plainTextToken,
             'token_type' => 'Bearer'
         ];
     }
