@@ -8,7 +8,9 @@ use App\Models\CarModel;
 use App\Models\Car;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Collection;
+
+//use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,12 +24,10 @@ class DatabaseSeeder extends Seeder
         $start = microtime(true);
         $userCount = 1000;
 
-//        $users = User::factory($userCount)->create();
         $usersIDs = User::factory($userCount)->create()->pluck('id');
+        $carBrandsIDs = CarBrand::factory(10)->create()->pluck('id');
 
-        $carBrands = CarBrand::factory(10)->create();
-
-        $carModels = $this->generateCarModels($carBrands, intdiv($userCount, 10));
+        $carModels = $this->generateCarModels(intdiv($userCount, 10), $carBrandsIDs);
 
         $carModels->each(function ($carModel) use ($usersIDs) {
             Car::create([
@@ -43,22 +43,20 @@ class DatabaseSeeder extends Seeder
 
     /**
      * На основе брендов $times раз генерируем CarModels
-     * @param Collection $carBrands
      * @param int $times
+     * @param Collection $carBrandsIDs
      * @return Collection
      */
-    private function generateCarModels(Collection $carBrands, int $times): Collection
+    private function generateCarModels(int $times, Collection $carBrandsIDs): Collection
     {
         $carModels = new Collection();
         for ($i = 1; $i <= $times; $i++) {
-            $carBrandsCollection = $carBrands->each(function ($carBrand) {
-                CarModel::create([
+            for ($j = 1; $j <= count($carBrandsIDs); $j++) {
+                $car = CarModel::create([
                     'name' => fake()->unique()->sentence(),
-                    'car_brand_id' => $carBrand->id,
+                    'car_brand_id' => fake()->randomElement($carBrandsIDs),
                 ]);
-            });
-            foreach ($carBrandsCollection as $brand) {
-                $carModels = $carModels->push(...$brand->carModel);
+                $carModels = $carModels->push($car);
             }
         }
         return $carModels;
