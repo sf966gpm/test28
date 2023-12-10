@@ -44,25 +44,43 @@
 
 ### Использование
 
-#### Готовы запросы по ссылки снизу
-
-[Ссылка на открытый Workspace postman, с готовыми запросами.](https://vk.com/away.php?utf=1&to=https%3A%2F%2Fwww.postman.com%2Fsf966gpm%2Fworkspace%2Ftest28)
-
-1. Docker
+#### Docker
 
 ```bash
 cd /project-folder/test28
 
-### linux
+# Одно из двух делаем
+# linux
 cp .env.example .env
-### windows
+# windows
 copy .env.example .env
 
+# Сборка образа
 docker compose build
+# Запуск контейнеров
 docker compose up -d
 ```
 
-Ждём пока соберется проект, запускаем контейнеры ждем до 30 секунд пока migrate --seed закончиться.
+1. Ждём пока соберутся образы
+2. Запускаем контейнеры
+3. Убедились что она все встали
+4. Ждем до 30 секунд пока отработает стартовый скрипт для контейнера api.
 
-Я подготовил пользователя c email=test28@mail.ru password=password
-Начинаем делать запросы из postman.
+#### Postman
+
+[Ссылка на открытый Workspace postman, с готовыми запросами.](https://vk.com/away.php?utf=1&to=https%3A%2F%2Fwww.postman.com%2Fsf966gpm%2Fworkspace%2Ftest28)
+
+1. Форкаем postman, заходим в папку auth
+2. Выбираем request Login (подготовил пользователя c email=test28@mail.ru password=password)
+3. Отправляем(send)
+4. Из ответа, получаем token(Тип указан в ответе)
+5. Записываем его в Variables коллекции, называем его test28_token
+
+Наслаждаемся.
+
+### Добавил от себя
+
+1. expire token поставил на 30 минут
+2. сделал schedule контейнер, в котором работает Laravel schedule через cron
+3. каждый 15 минут проверяет и удаляет просроченные token
+
