@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
 
         $start = microtime(true);
         $userCount = 500;
+        $this->addSpecialUser();
         $this->seedApi($userCount);
         $this->command->info('Seeding end in ' . microtime(true) - $start . ' seconds');
     }
@@ -53,6 +54,14 @@ class DatabaseSeeder extends Seeder
                         'user_id' => $user
                     ]);
             });
+    }
+
+    private function addSpecialUser(): void
+    {
+        User::factory()->create([
+            'email' => 'test28@mail.ru',
+            'name' => 'Тест Тест Тест'
+        ]);
     }
 
 }

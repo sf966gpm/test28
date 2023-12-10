@@ -1,16 +1,36 @@
 version: '3.9'
-services:
+
+volumes:
+    bd:
+
+networks:
     back:
+
+services:
+    api:
         build:
             context: .
             dockerfile: /docker/dockerfile
+            target: php
         networks:
             - back
-        volumes:
-            - ./:/app
         ports:
             - "8000:8000"
         working_dir: /app
+        depends_on:
+            - postgres
+        volumes:
+            - ./:/app
+
+    schedule:
+        build:
+            context: .
+            dockerfile: /docker/dockerfile
+            target: cron
+        depends_on:
+            - postgres
+        networks:
+            - back
 
     postgres:
         image: postgres:alpine
@@ -21,12 +41,7 @@ services:
         networks:
             - back
         ports:
-            - "${DB_PORT}:5432"
+            - "5432:5432"
         volumes:
             - bd:/var/lib/postgresql
-
-volumes:
-    bd:
-networks:
-    back:
 

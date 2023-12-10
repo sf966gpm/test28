@@ -30,5 +30,8 @@ class CarBrandFactory extends Factory
                 'CHANGAN',
             ]),
         ];
+//        return [
+//            'name' => fake()->unique()->company()
+//        ];
     }
 }

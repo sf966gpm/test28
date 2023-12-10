@@ -12,8 +12,7 @@ return new class extends Migration {
     {
         Schema::create('car_brands', function (Blueprint $table) {
             $table->id();
-//            Примерно оценил в 15 символов
-            $table->string('name', 15)->unique();
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

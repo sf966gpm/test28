@@ -1,10 +1,10 @@
-FROM php:8.2-cli
+FROM php:8.2-cli as build
 
 WORKDIR /app
 
 RUN apt-get update \
     # Минимальные утилиты
-    && apt-get install -y zip unzip mc bash\
+    && apt-get install -y zip unzip \
     # Модули для php-ext
     libxml2-dev libpq-dev \
     # php extension
@@ -14,8 +14,21 @@ RUN apt-get update \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY ./ /app
 
-RUN composer install --no-dev
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader \
+    && php artisan cache:clear \
+    && php artisan route:cache \
+    && php artisan key:generate \
+    && php artisan config:cache
 
+
+
+FROM build as php
+RUN ln -s /app/docker/start.sh /usr/bin/start.sh
 EXPOSE 8000
+ENTRYPOINT ["start.sh"]
+CMD ["/app"]
 
-CMD php artisan serve --host=0.0.0.0 --port=8000
+FROM build as cron
+RUN apt-get install -y cron \
+    && crontab /app/docker/cron
+CMD ["cron", "&&","tail","-f","/var/log/cron.log","2>&1"]

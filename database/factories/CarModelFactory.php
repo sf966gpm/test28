@@ -18,7 +18,7 @@ class CarModelFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->sentence(),
+            'name' => fake()->unique()->text(15),
             'car_brand_id' => CarBrand::factory()
         ];
     }

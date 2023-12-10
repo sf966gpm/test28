@@ -5,13 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Services\UserService;
-use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    use HttpResponses;
 
     public function login(LoginUserRequest $request, UserService $userService): JsonResponse
     {
@@ -30,8 +28,11 @@ class AuthController extends Controller
         return $this->success($userService->registerUserData($validated));
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
-        return response()->json('This is myu logout method');
+        $tokenCount = Auth::user()->tokens()->where('tokenable_id', Auth::id())->delete();
+
+        return $this->success('', 'Вы успешно вышли из системы. ' .
+            'Токенов было удалено - ' . $tokenCount . ' шт.');
     }
 }

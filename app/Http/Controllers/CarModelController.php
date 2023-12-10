@@ -5,19 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CarModelCollection;
 use App\Http\Resources\CarModelResource;
 use App\Models\CarModel;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class CarModelController extends Controller
 {
     //avoid sending a request with relations to the database inside the resource
 
-    public function index(): CarModelCollection
+    public function index(): JsonResponse
     {
-        return new CarModelCollection(CarModel::with('carBrand')->paginate());
+        $carModelCollection = CarModelCollection::make(CarModel::with('carBrand')->paginate());
+        return $this->success($carModelCollection, 'Список все моделей');
     }
 
-    public function show(CarModel $carModel): CarModelResource
+    public function show(CarModel $carModel): JsonResponse
     {
-        return new CarModelResource($carModel->load('carBrand'));
+        $carModelResource = CarModelResource::make($carModel->load('carBrand'));
+        return $this->success($carModelResource, 'Модель с id - ' . $carModel->id);
     }
 }
