@@ -15,22 +15,20 @@ use Illuminate\Support\Facades\Auth;
 class CarController extends Controller
 {
 
-    public function index(): JsonResponse
+    public function index(): CarCollection
     {
-        $carCollection = CarCollection::make(
+        return CarCollection::make(
             Car::with('carModel.carBrand', 'user')
                 ->where('user_id', Auth::id())
                 ->paginate()
         );
-        return $this->success($carCollection, 'Список ваших автомобилей');
     }
 
-    public function show(Car $car): JsonResponse
+    public function show(Car $car): CarResource
     {
         $this->authorize('view', $car);
 
-        $carResource = CarResource::make($car->load('user', 'carModel.carBrand'));
-        return $this->success($carResource, 'Машина c id - ' . $car->id);
+        return CarResource::make($car->load('user', 'carModel.carBrand'));
     }
 
     public function store(StoreCarRequest $request, CarService $carService): JsonResponse
@@ -38,10 +36,12 @@ class CarController extends Controller
         $validated = $request->validated();
 
         $car = $carService->createCar($validated);
-        return $this->success(CarResource::make($car), 'Машина занесена в базу.', 201);
+        return CarResource::make($car)
+            ->response()
+            ->setStatusCode(201);
     }
 
-    public function update(UpdateCarRequest $request, Car $car, CarService $carService): JsonResponse
+    public function update(UpdateCarRequest $request, Car $car, CarService $carService): CarResource
     {
         $this->authorize('update', $car);
 
@@ -49,7 +49,7 @@ class CarController extends Controller
 
 
         $car = $carService->updateCar($validated, $car->load('user', 'carModel.carBrand'));
-        return $this->success(CarResource::make($car), 'Машина обновлена в базе.');
+        return CarResource::make($car);
     }
 
     public function destroy(Car $car): JsonResponse

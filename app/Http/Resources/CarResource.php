@@ -22,6 +22,5 @@ class CarResource extends JsonResource
             'car_model' => new CarModelResource($this->carModel),
             'user' => new UserResource($this->user)
         ];
-
     }
 }

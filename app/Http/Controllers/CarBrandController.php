@@ -5,19 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CarBrandCollection;
 use App\Http\Resources\CarBrandResource;
 use App\Models\CarBrand;
-use Illuminate\Http\JsonResponse;
 
 class CarBrandController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): CarBrandCollection
     {
-        $carBrandCollection = CarBrandCollection::make(CarBrand::paginate());
-        return $this->success($carBrandCollection, 'Список всех брэндов');
+        return CarBrandCollection::make(CarBrand::paginate());
     }
 
-    public function show(CarBrand $carBrand): JsonResponse
+    public function show(CarBrand $carBrand): CarBrandResource
     {
-        $carBrandResource = CarBrandResource::make($carBrand);
-        return $this->success($carBrandResource, 'Бренд с id - ' . $carBrand->id);
+        return CarBrandResource::make($carBrand);
     }
 }
