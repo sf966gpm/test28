@@ -42,4 +42,27 @@
 Привязать автомобиль к пользователю и разрешить пользователям доступ только к “своим” автомобилям.
 </details>
 
+### Использование
 
+#### Готовы запросы по ссылки снизу
+
+[Ссылка на открытый Workspace postman, с готовыми запросами.](https://vk.com/away.php?utf=1&to=https%3A%2F%2Fwww.postman.com%2Fsf966gpm%2Fworkspace%2Ftest28)
+
+1. Docker
+
+```bash
+cd /project-folder/test28
+
+### linux
+cp .env.example .env
+### windows
+copy .env.example .env
+
+docker compose build
+docker compose up -d
+```
+
+Ждём пока соберется проект, запускаем контейнеры ждем до 30 секунд пока migrate --seed закончиться.
+
+Я подготовил пользователя c email=test28@mail.ru password=password
+Начинаем делать запросы из postman.
