@@ -35,12 +35,12 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-        if ($e instanceof ModelNotFoundException && $request->wantsJson()) {
-            return $this->error('', 'Модель не найдена.', 404);
-        }
-        if ($e instanceof QueryException && $request->wantsJson()) {
-            return $this->error('', 'Конфликт.', 409);
-        }
+//        if ($e instanceof ModelNotFoundException && $request->wantsJson()) {
+//            return $this->error('', 'Модель не найдена.', 404);
+//        }
+//        if ($e instanceof QueryException && $request->wantsJson()) {
+//            return $this->error('', 'Конфликт.', 409);
+//        }
 
         return parent::render($request, $e);
     }

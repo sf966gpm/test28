@@ -11,7 +11,6 @@ class CarService
 {
     public function createCar(array $validated): Car
     {
-
         $carModel = CarModel::find($validated['car_model_id']);
 
         $car = Car::create([

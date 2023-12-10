@@ -22,11 +22,10 @@ class UpdateCarRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
-            'car_model_id' => ['sometimes', 'integer'],
-            'vehicle_year' => ['nullable', 'integer'],
-            'mileage' => ['nullable', 'integer'],
+            'car_model_id' => ['sometimes', 'integer', 'exists:car_models,id'],
+            'vehicle_year' => ['nullable', 'integer', 'between:1880,2025'],
+            'mileage' => ['nullable', 'integer', 'min:0'],
             'color' => ['nullable', 'hex_color'],
         ];
     }

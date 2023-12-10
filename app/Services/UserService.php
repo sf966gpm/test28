@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
-
+    /**
+     * Создаем пользователя
+     * @param array $validated
+     * @return array
+     */
     public function registerUserData(array $validated): array
     {
         $user = User::create([
@@ -21,7 +25,7 @@ class UserService
     }
 
     /**
-     * Отдаём массив с пользователем, токеном и его типом.
+     * Отдаём массив userData с данными.
      * @param string $email
      * Проверен на существование в базе
      * @return array
@@ -33,6 +37,11 @@ class UserService
 
     }
 
+    /**
+     * Делает выборку данных у user
+     * @param User $user
+     * @return array
+     */
     private function userData(User $user): array
     {
         return [
