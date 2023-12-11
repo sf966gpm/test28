@@ -15,7 +15,7 @@ services:
         networks:
             - back
         ports:
-            - "8000:8000"
+            - "7474:8000"
 
     schedule:
         build:
@@ -36,5 +36,5 @@ services:
         networks:
             - back
         ports:
-            - "5432:5432"
+            - "4545:5432"
 
